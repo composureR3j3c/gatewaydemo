@@ -12,7 +12,7 @@ export default function SettingsPage() {
       case "general":
         return (
           <div className="space-y-4">
-            {/* <div className="flex items-center justify-between p-4 bg-white rounded shadow">
+            <div className="flex items-center justify-between p-4 bg-white rounded shadow">
               <span>Dark Mode</span>
               <label className="inline-flex relative items-center cursor-pointer">
                 <input
@@ -24,7 +24,7 @@ export default function SettingsPage() {
                 <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-indigo-600 transition-all"></div>
                 <div className="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full peer-checked:translate-x-5 transition-all"></div>
               </label>
-            </div> */}
+            </div>
 
             <div className="flex items-center justify-between p-4 bg-white rounded shadow">
               <span>Enable Notifications</span>
@@ -67,7 +67,7 @@ export default function SettingsPage() {
           <div className="p-4 bg-white rounded shadow space-y-4">
             <h2 className="font-bold text-lg mb-2">Account Settings</h2>
             <p>Change your password, manage account info, etc.</p>
-            <button className="px-4 py-2 bg-slate-800 text-white rounded hover:bg-indigo-700 transition">
+            <button className="px-4 py-2 bg-slate-800 text-white rounded hover:bg-slate-700 transition">
               Update Password
             </button>
           </div>
@@ -102,7 +102,7 @@ export default function SettingsPage() {
         <ul className="space-y-3">
           <li
             className={`cursor-pointer p-2 rounded ${
-              activeTab === "general" ? "bg-indigo-100 text-indigo-700" : "hover:bg-gray-100"
+              activeTab === "general" ? "bg-green-100 text-green-800" : "hover:bg-gray-100"
             }`}
             onClick={() => setActiveTab("general")}
           >
@@ -110,7 +110,7 @@ export default function SettingsPage() {
           </li>
           <li
             className={`cursor-pointer p-2 rounded ${
-              activeTab === "account" ? "bg-indigo-100 text-indigo-700" : "hover:bg-gray-100"
+              activeTab === "account" ?  "bg-green-100 text-green-800" : "hover:bg-gray-100"
             }`}
             onClick={() => setActiveTab("account")}
           >
@@ -118,7 +118,7 @@ export default function SettingsPage() {
           </li>
           <li
             className={`cursor-pointer p-2 rounded ${
-              activeTab === "notifications" ? "bg-indigo-100 text-indigo-700" : "hover:bg-gray-100"
+              activeTab === "notifications" ?  "bg-green-100 text-green-800" : "hover:bg-gray-100"
             }`}
             onClick={() => setActiveTab("notifications")}
           >

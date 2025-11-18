@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import routesJson from "/src/data/routes.json";
 import pluginsJson from "/src/data/plugins.json";
+import { BarChart3, Network, Plug, Plug2, Route } from "lucide-react";
 
 export default function Dashboard() {
   const [metrics, setMetrics] = useState({
@@ -37,44 +38,66 @@ export default function Dashboard() {
 
       {/* Metrics Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white shadow rounded-xl p-4 flex flex-col">
-          <span className="text-gray-500 text-sm">Active Connections</span>
-          <span className="text-2xl font-bold">
-            {metrics.activeConnections}
-          </span>
+        <div className="bg-white border shadow rounded-xl flex items-center gap-2 px-4">
+          <div className="p-3 bg-blue-100 rounded-xl flex items-center gap-3">
+            <Network className="w-5 h-5 text-blue-600" />
+          </div>
+          <div className="p-4 flex flex-col">
+            <span className="text-gray-500 text-sm">Active Connections</span>
+            <span className="text-2xl font-bold">
+              {metrics.activeConnections}
+            </span>
+          </div>
         </div>
-        <div className="bg-white shadow rounded-xl p-4 flex flex-col">
-          <span className="text-gray-500 text-sm">Total Routes</span>
-          <span className="text-2xl font-bold">{routes.length}</span>
+        <div className="bg-white border shadow rounded-xl flex items-center gap-2 px-4">
+          <div className="p-3 bg-red-100 rounded-xl flex items-center gap-3">
+            <Route className="w-5 h-5 text-red-600" />
+          </div>
+          <div className="p-4 flex flex-col">
+            <span className="text-gray-500 text-sm">Total Routes</span>
+            <span className="text-2xl font-bold">{routes.length}</span>
+          </div>
         </div>
-        <div className="bg-white shadow rounded-xl p-4 flex flex-col">
-          <span className="text-gray-500 text-sm">Total Plugins</span>
-          <span className="text-2xl font-bold">{plugins.length}</span>
+        <div className="bg-white border shadow rounded-xl flex items-center gap-2 px-4">
+          <div className="p-3 bg-green-100 rounded-xl flex items-center justify-center">
+            <Plug className="w-5 h-5 text-green-600" />
+          </div>
+          <div className="p-4 flex flex-col">
+            <span className="text-gray-500 text-sm">Total Plugins</span>
+            <span className="text-2xl font-bold">{plugins.length}</span>
+          </div>
         </div>
-        <div className="bg-white shadow rounded-xl p-4 flex flex-col">
-          <span className="text-gray-500 text-sm">Avg Latency</span>
-          <span className="text-2xl font-bold">{metrics.avgLatency} ms</span>
+        <div className="bg-white border shadow rounded-xl flex items-center gap-2 px-4">
+          <div className="p-3 bg-purple-100 rounded-xl flex items-center justify-center">
+            <BarChart3 className="w-5 h-5 text-purple-600" />
+          </div>
+          <div className="p-4 flex flex-col">
+            <span className="text-gray-500 text-sm">Avg Latency</span>
+            <span className="text-2xl font-bold">{metrics.avgLatency} ms</span>
+          </div>
         </div>
       </div>
 
       {/* Node Info */}
       <div className="bg-white rounded-xl shadow p-4 ">
         <h2 className="text-xl font-semibold mb-2">Node Info</h2>
-        <br/>
-         <div className="bg-white rounded-xl shadow p-4 flex justify-between items-center
-      ">
-        <p className="text-gray-700">
-          Hostname: <span className="font-medium">{metrics.hostname}</span>
-        </p>
-        <p className="text-gray-700">
-          Version: <span className="font-medium">{metrics.nodeVersion}</span>
-        </p>
-        <p className="text-gray-700">
-          Uptime:{" "}
-          <span className="font-medium">
-            {Math.floor(Math.random() * 100)} hrs
-          </span>
-        </p>
+        <br />
+        <div
+          className="bg-white rounded-xl shadow p-4 flex justify-between items-center
+      "
+        >
+          <p className="text-gray-700">
+            Hostname: <span className="font-medium">{metrics.hostname}</span>
+          </p>
+          <p className="text-gray-700">
+            Version: <span className="font-medium">{metrics.nodeVersion}</span>
+          </p>
+          <p className="text-gray-700">
+            Uptime:{" "}
+            <span className="font-medium">
+              {Math.floor(Math.random() * 100)} hrs
+            </span>
+          </p>
         </div>
       </div>
 
@@ -104,16 +127,16 @@ export default function Dashboard() {
       {/* Plugins Table */}
       <div className="bg-white rounded-xl shadow p-4">
         <h2 className="text-xl font-semibold mb-4">Plugins</h2>
-          {plugins.map((p) => (
-             
-                  <span
-                    className={`px-2 py-1 rounded text-slate text-s m-1
-                  ${p.enabled ? "bg-green-200 text-green-800" : "bg-slate-200"}`}
-                  >
-                    {p.name}
-                  </span>
-                
-            ))}
+        {plugins.map((p) => (
+          <span
+            className={`px-2 py-1 rounded text-slate text-s m-1
+                  ${
+                    p.enabled ? "bg-green-200 text-green-800" : "bg-slate-200"
+                  }`}
+          >
+            {p.name}
+          </span>
+        ))}
       </div>
     </div>
   );
