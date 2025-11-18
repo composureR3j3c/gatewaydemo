@@ -137,7 +137,7 @@ export default function EditPluginModal({ plugin, close, save }) {
             Cancel
           </button>
           <button
-            className="px-4 py-2 bg-blue-600 text-white rounded"
+            className="px-4 py-2 bg-slate-600 text-white rounded"
             onClick={() => {
               save({ ...plugin, config });
               close();

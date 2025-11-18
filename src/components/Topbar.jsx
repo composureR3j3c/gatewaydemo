@@ -12,7 +12,15 @@ export default function Topbar({ toggle }) {
         Enterprise Gateway Manager
       </h2>
 
-      <div className="h-8 w-8 rounded-full bg-gray-300"></div>
+      <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center 
+      ">
+        <img
+          src="https://ui-avatars.com/api/?name=John+Doe&size=32&color=#fff"
+          // {logo}
+          alt="User"
+          className="h-8 w-8 rounded-full cursor-pointer"
+        />
+        </div>
     </div>
   );
 }

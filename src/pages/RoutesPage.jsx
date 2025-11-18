@@ -1,11 +1,9 @@
 // src/pages/RoutesPage.jsx
 import { useState } from "react";
+import routesJson from '/src/data/routes.json';
 
 export default function RoutesPage() {
-  const [routes, setRoutes] = useState([
-    { id: 1, name: "User API", path: "/users", upstream: "http://localhost:9001" },
-    { id: 2, name: "Payments API", path: "/payments", upstream: "http://localhost:9002" },
-  ]);
+  const [routes, setRoutes] = useState(routesJson );
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);

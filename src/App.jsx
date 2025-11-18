@@ -5,6 +5,7 @@ import Topbar from "./components/Topbar";
 import RoutesPage from "./pages/RoutesPage";
 import Dashboard from "./pages/Dashboard";
 import PluginsPage from "./pages/PluginsPage";
+import MetricsPage from "./pages/MetricsPage";
 // import MetricsPage from "./pages/MetricsPage";
 // import LogsPage from "./pages/LogsPage";
 // import SettingsPage from "./pages/SettingsPage";
@@ -23,10 +24,10 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/routes" element={<RoutesPage />} />
-             <Route path="/plugins" element={<PluginsPage />} />
-          {/*  <Route path="/metrics" element={<MetricsPage />} />
-            <Route path="/logs" element={<LogsPage />} />
-            <Route path="/settings" element={<SettingsPage />} /> */}
+            <Route path="/plugins" element={<PluginsPage />} />
+            <Route path="/metrics" element={<MetricsPage />} />
+            {/* <Route path="/logs" element={<LogsPage />} /> */}
+            {/* <Route path="/settings" element={<SettingsPage />} /> */}
           </Routes>
         </div>
       </div>

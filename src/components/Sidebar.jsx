@@ -39,7 +39,7 @@ export default function Sidebar({ open }) {
           <NavItem open={open} icon={<Gauge />} link={"/"} label="Dashboard" />
           <NavItem open={open} icon={<GitBranch />} link={"/routes"} label="Routes" />
           <NavItem open={open} icon={<Plug />} label="Plugins" link={"/plugins"} />
-          <NavItem open={open} icon={<Activity />} label="Metrics" />
+          <NavItem open={open} icon={<Activity />} label="Metrics" link={"/metrics"}/>
           <NavItem open={open} icon={<Settings />} label="Settings" />
         </nav>
       </aside>

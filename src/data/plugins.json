@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "label": "Rate Limiting",
+    "name": "rate-limiting",
+    "enabled": true,
+    "config": {
+      "second": 10,
+      "minute": 500,
+      "hour": 10000,
+      "policy": "local"
+    }
+  },
+  {
+    "id": 2,
+    "label": "API Key Auth",
+    "name": "key-auth",
+    "enabled": false,
+    "config": {
+      "key_names": ["apiKey"],
+      "hide_credentials": false,
+      "ttl": 0
+    }
+  },
+  {
+    "id": 3,
+    "label": "JWT Auth",
+    "name": "jwt",
+    "enabled": true,
+    "config": {
+      "uri_param_names": ["jwt"],
+      "cookie_names": ["jwt"],
+      "claims_to_verify": ["exp"]
+    }
+  },
+  {
+    "id": 4,
+    "label": "ACL",
+    "name": "acl",
+    "enabled": false,
+    "config": {
+      "allow": ["admin"],
+      "deny": [],
+      "hide_groups_header": false
+    }
+  },
+  {
+    "id": 5,
+    "label": "CORS",
+    "name": "cors",
+    "enabled": true,
+    "config": {
+      "origins": ["*"],
+      "methods": ["GET", "POST", "PUT", "DELETE"],
+      "headers": ["*"],
+      "exposed_headers": ["X-Auth"],
+      "credentials": true,
+      "max_age": 3600
+    }
+  },
+  {
+    "id": 6,
+    "label": "IP Restriction",
+    "name": "ip-restriction",
+    "enabled": true,
+    "config": {
+      "allow": ["192.168.0.0/24"],
+      "deny": ["10.0.0.0/8"]
+    }
+  },
+  {
+    "id": 7,
+    "label": "Request Transformer",
+    "name": "request-transformer",
+    "enabled": true,
+    "config": {
+      "add_headers": { "X-New-Header": "value" },
+      "remove_headers": ["X-Old-Header"],
+      "add_query": { "token": "123" },
+      "remove_query": ["debug"]
+    }
+  },
+  {
+    "id": 8,
+    "label": "Response Transformer",
+    "name": "response-transformer",
+    "enabled": false,
+    "config": {
+      "add_headers": { "X-Response-Header": "value" },
+      "remove_headers": ["X-Remove-Header"]
+    }
+  }
+]

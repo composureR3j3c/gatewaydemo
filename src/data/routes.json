@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "User API",
+    "path": "/users",
+    "upstream": "http://localhost:9001"
+  },
+  {
+    "id": 2,
+    "name": "Payments API",
+    "path": "/payments",
+    "upstream": "http://localhost:9002"
+  }
+]

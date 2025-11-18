@@ -2,102 +2,9 @@ import { useState } from "react";
 import EditPluginModal from "../components/modals/EditPluginModal";
 import AddPluginModal from "../components/modals/AddPluginModal";
 import ConfirmDeleteModal from "../components/modals/ConfirmDeleteModal";
-
+import pluginsJson from '/src/data/plugins.json';
 export default function PluginsPage() {
-  const [plugins, setPlugins] = useState([
-      {
-    id: 1,
-    label: "Rate Limiting",
-    name: "rate-limiting",
-    enabled: true,
-    config: {
-      second: 10,
-      minute: 500,
-      hour: 10000,
-      policy: "local",
-    },
-  },
-  {
-    id: 2,
-    label: "API Key Auth",
-    name: "key-auth",
-    enabled: false,
-    config: {
-      key_names: ["apiKey"],
-      hide_credentials: false,
-      ttl: 0,
-    },
-  },
-  {
-    id: 3,
-    label: "JWT Auth",
-    name: "jwt",
-    enabled: true,
-    config: {
-      uri_param_names: ["jwt"],
-      cookie_names: ["jwt"],
-      claims_to_verify: ["exp"],
-    },
-  },
-  {
-    id: 4,
-    label: "ACL",
-    name: "acl",
-    enabled: false,
-    config: {
-      allow: ["admin"],
-      deny: [],
-      hide_groups_header: false,
-    },
-  },
-  {
-    id: 5,
-    label: "CORS",
-    name: "cors",
-    enabled: true,
-    config: {
-      origins: ["*"],
-      methods: ["GET", "POST", "PUT", "DELETE"],
-      headers: ["*"],
-      exposed_headers: ["X-Auth"],
-      credentials: true,
-      max_age: 3600,
-    },
-  },
-  {
-    id: 6,
-    label: "IP Restriction",
-    name: "ip-restriction",
-    enabled: true,
-    config: {
-      allow: ["192.168.0.0/24"],
-      deny: ["10.0.0.0/8"],
-    },
-  },
-  {
-    id: 7,
-    label: "Request Transformer",
-    name: "request-transformer",
-    enabled: true,
-    config: {
-      add_headers: { "X-New-Header": "value" },
-      remove_headers: ["X-Old-Header"],
-      add_query: { token: "123" },
-      remove_query: ["debug"],
-    },
-  },
-  {
-    id: 8,
-    label: "Response Transformer",
-    name: "response-transformer",
-    enabled: true,
-    config: {
-      add_headers: { "X-Response-Header": "value" },
-      remove_headers: ["X-Remove-Header"],
-    },
-  },
-   
-  ]);
+  const [plugins, setPlugins] = useState(pluginsJson );
 
   const [showAdd, setShowAdd] = useState(false);
   const [editData, setEditData] = useState(null);
@@ -136,13 +43,13 @@ export default function PluginsPage() {
                   </td>
                   <td className="py-3 space-x-3">
                     <button
-                      className="px-3 py-1 bg-blue-600 text-white rounded-lg text-xs"
+                      className="px-3 py-1 bg-slate-800 text-white rounded-lg text-xs"
                       onClick={() => setEditData(p)}
                     >
                       Edit
                     </button>
                     <button
-                      className={`px-3 py-1 ${p.enabled ?'bg-red-700':'bg-green-700'} text-white rounded-lg text-xs`}
+                      className={`px-3 py-1 ${p.enabled ?'bg-gray-400':'bg-green-800 text-white'}  rounded-lg text-xs`}
                       onClick={() => {
                         updatePlugin({ ...p, enabled: !p.enabled });
                       }}

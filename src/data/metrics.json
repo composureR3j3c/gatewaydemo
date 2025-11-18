@@ -1,0 +1,31 @@
+{
+  "requests": 120340,
+  "successRate": 98.7,
+  "avgLatency": 32,
+  "activePlugins": 14,
+  "nodes": [
+    { "id": "node-1", "cpu": 43, "mem": 62, "connections": 340 },
+    { "id": "node-2", "cpu": 51, "mem": 49, "connections": 280 },
+    { "id": "node-3", "cpu": 37, "mem": 55, "connections": 410 }
+  ],
+  "traffic": [
+    { "label": "00-03", "count": 1200 },
+    { "label": "03-06", "count": 3400 },
+    { "label": "06-09", "count": 7800 },
+    { "label": "09-12", "count": 9600 },
+    { "label": "12-15", "count": 8600 },
+    { "label": "15-18", "count": 7500 },
+    { "label": "18-21", "count": 4400 },
+    { "label": "21-24", "count": 3200 }
+  ],
+  "traffic2": [
+    { "label": "00-03", "count": 900 },
+    { "label": "03-06", "count": 1200 },
+    { "label": "06-09", "count": 5600 },
+    { "label": "09-12", "count": 8400 },
+    { "label": "12-15", "count": 7200 },
+    { "label": "15-18", "count": 6300 },
+    { "label": "18-21", "count": 3900 },
+    { "label": "21-24", "count": 2100 }
+  ]
+}
