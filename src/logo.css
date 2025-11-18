@@ -1,0 +1,4 @@
+.double-underline {
+  /* text-decoration-line: underline; */
+  text-decoration-style: double;
+}

@@ -8,6 +8,7 @@ import {
   Activity,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+ import "/src/logo.css";
 
 export default function Sidebar({ open }) {
   return (
@@ -22,8 +23,11 @@ export default function Sidebar({ open }) {
       >
         {/* Logo + Toggle */}
         <div className="flex items-center justify-between p-5 border-b border-slate-800">
-          <span className="text-xl font-semibold tracking-wide">
-            {open ? "API Gateway" : "AG"}
+          <span className="text-xl font-mono font-bold 
+           tracking-wide double-underline" 
+          //  style={"text-decoration-style: solid;"}
+           >
+            {open ? "API GW" : "AG"}
           </span>
           {/* <button onClick={() => setOpen(!open)}>
             {open ? (

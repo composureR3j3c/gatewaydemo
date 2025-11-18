@@ -102,7 +102,7 @@ export default function SettingsPage() {
         <ul className="space-y-3">
           <li
             className={`cursor-pointer p-2 rounded ${
-              activeTab === "general" ? "bg-green-100 text-green-800" : "hover:bg-gray-100"
+              activeTab === "general" ? "bg-green-100 text-green-900 font-bold" : "hover:bg-gray-100"
             }`}
             onClick={() => setActiveTab("general")}
           >
@@ -110,7 +110,7 @@ export default function SettingsPage() {
           </li>
           <li
             className={`cursor-pointer p-2 rounded ${
-              activeTab === "account" ?  "bg-green-100 text-green-800" : "hover:bg-gray-100"
+              activeTab === "account" ?  "bg-green-100 text-green-900 font-bold" : "hover:bg-gray-100"
             }`}
             onClick={() => setActiveTab("account")}
           >
@@ -118,7 +118,7 @@ export default function SettingsPage() {
           </li>
           <li
             className={`cursor-pointer p-2 rounded ${
-              activeTab === "notifications" ?  "bg-green-100 text-green-800" : "hover:bg-gray-100"
+              activeTab === "notifications" ?  "bg-green-100 text-green-900 font-bold" : "hover:bg-gray-100"
             }`}
             onClick={() => setActiveTab("notifications")}
           >
