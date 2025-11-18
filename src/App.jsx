@@ -6,6 +6,7 @@ import RoutesPage from "./pages/RoutesPage";
 import Dashboard from "./pages/Dashboard";
 import PluginsPage from "./pages/PluginsPage";
 import MetricsPage from "./pages/MetricsPage";
+import SettingsPage from "./pages/SettingsPage";
 // import MetricsPage from "./pages/MetricsPage";
 // import LogsPage from "./pages/LogsPage";
 // import SettingsPage from "./pages/SettingsPage";
@@ -27,7 +28,7 @@ export default function App() {
             <Route path="/plugins" element={<PluginsPage />} />
             <Route path="/metrics" element={<MetricsPage />} />
             {/* <Route path="/logs" element={<LogsPage />} /> */}
-            {/* <Route path="/settings" element={<SettingsPage />} /> */}
+            <Route path="/settings" element={<SettingsPage />} />
           </Routes>
         </div>
       </div>
