@@ -1,140 +1,266 @@
-import { useState } from "react";
+// src/pages/SettingsPage.jsx
+import React, { useState, useEffect } from "react";
+import { Save, Settings, Shield, Gauge } from "lucide-react";
+import settingsJson from "/src/data/settings.json";
 
 export default function SettingsPage() {
-  const [activeTab, setActiveTab] = useState("general");
-  const [darkMode, setDarkMode] = useState(false);
+  const [settings, setSettings] = useState(settingsJson);
+
   const [notifications, setNotifications] = useState(true);
-  const [language, setLanguage] = useState("en");
-  const [email, setEmail] = useState("");
 
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case "general":
-        return (
-          <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 bg-white rounded shadow">
-              <span>Dark Mode</span>
-              <label className="inline-flex relative items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="sr-only peer"
-                  checked={darkMode}
-                  onChange={() => setDarkMode(!darkMode)}
-                />
-                <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-indigo-600 transition-all"></div>
-                <div className="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full peer-checked:translate-x-5 transition-all"></div>
-              </label>
-            </div>
+  useEffect(() => {
+    const saved = localStorage.getItem("gateway-settings");
+    if (saved) setSettings(JSON.parse(saved));
+  }, []);
 
-            <div className="flex items-center justify-between p-4 bg-white rounded shadow">
-              <span>Enable Notifications</span>
-              <input
-                type="checkbox"
-                className="w-6 h-6 accent-slate-800"
-                checked={notifications}
-                onChange={() => setNotifications(!notifications)}
-              />
-            </div>
+  const update = (field, value) => {
+    setSettings((prev) => ({ ...prev, [field]: value }));
+  };
 
-            <div className="p-4 bg-white rounded shadow">
-              <label className="block mb-2">Language</label>
-              <select
-                value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded"
-              >
-                <option value="en">English</option>
-                <option value="fr">French</option>
-                <option value="es">Spanish</option>
-              </select>
-            </div>
-
-            <div className="p-4 bg-white rounded shadow">
-              <label className="block mb-2">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded"
-                placeholder="Enter your email"
-              />
-            </div>
-          </div>
-        );
-
-      case "account":
-        return (
-          <div className="p-4 bg-white rounded shadow space-y-4">
-            <h2 className="font-bold text-lg mb-2">Account Settings</h2>
-            <p>Change your password, manage account info, etc.</p>
-            <button className="px-4 py-2 bg-slate-800 text-white rounded hover:bg-slate-700 transition">
-              Update Password
-            </button>
-          </div>
-        );
-
-      case "notifications":
-        return (
-          <div className="p-4 bg-white rounded shadow space-y-4">
-            <h2 className="font-bold text-lg mb-2">Notification Settings</h2>
-            <p>Manage email, SMS, and app notifications.</p>
-            <div className="flex items-center gap-4">
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-slate-800" /> Email Alerts
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-slate-800" /> SMS Alerts
-              </label>
-            </div>
-          </div>
-        );
-
-      default:
-        return <div>Select a tab</div>;
-    }
+  const saveSettings = () => {
+    localStorage.setItem("gateway-settings", JSON.stringify(settings));
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-md p-6">
-        <h2 className="text-xl font-bold mb-6">Settings</h2>
-        <ul className="space-y-3">
-          <li
-            className={`cursor-pointer p-2 rounded ${
-              activeTab === "general" ? "bg-green-100 text-green-900 font-bold" : "hover:bg-gray-100"
-            }`}
-            onClick={() => setActiveTab("general")}
-          >
-            General
-          </li>
-          <li
-            className={`cursor-pointer p-2 rounded ${
-              activeTab === "account" ?  "bg-green-100 text-green-900 font-bold" : "hover:bg-gray-100"
-            }`}
-            onClick={() => setActiveTab("account")}
-          >
-            Account
-          </li>
-          <li
-            className={`cursor-pointer p-2 rounded ${
-              activeTab === "notifications" ?  "bg-green-100 text-green-900 font-bold" : "hover:bg-gray-100"
-            }`}
-            onClick={() => setActiveTab("notifications")}
-          >
-            Notifications
-          </li>
-          {/* <li
-            className={`cursor-pointer p-2 rounded hover:bg-gray-100`}
-            onClick={() => alert("Appearance settings coming soon")}
-          >
-            Appearance
-          </li> */}
-        </ul>
-      </aside>
+    <div className="p-6 space-y-6">
+      <h1 className="text-2xl font-semibold text-gray-900 flex items-center gap-2">
+        <Settings className="w-6 h-6" />
+        Settings
+      </h1>
 
-      {/* Content */}
-      <main className="flex-1 p-8 overflow-auto">{renderTabContent()}</main>
+      {/* GENERAL */}
+      <Section title="General Gateway Settings">
+        <Input
+          label="Gateway Name"
+          value={settings.gatewayName}
+          onChange={(e) => update("gatewayName", e.target.value)}
+        />
+
+        <Input
+          label="Base URL"
+          value={settings.baseUrl}
+          onChange={(e) => update("baseUrl", e.target.value)}
+        />
+
+        <Select
+          label="Mode"
+          value={settings.mode}
+          onChange={(e) => update("mode", e.target.value)}
+          options={["development", "staging", "production"]}
+        />
+
+        <Toggle
+          label="Enable Debug Logs"
+          checked={settings.debugLogs}
+          onChange={(e) => update("debugLogs", e.target.checked)}
+        />
+      </Section>
+
+      {/* TRAFFIC */}
+      <Section title="Traffic & Rate Control">
+        <Input
+          label="Global Rate Limit (req/min)"
+          type="number"
+          value={settings.globalRateLimit}
+          onChange={(e) => update("globalRateLimit", e.target.value)}
+        />
+
+        <Input
+          label="Burst Limit"
+          type="number"
+          value={settings.burstLimit}
+          onChange={(e) => update("burstLimit", e.target.value)}
+        />
+
+        <Input
+          label="Window (seconds)"
+          type="number"
+          value={settings.windowSeconds}
+          onChange={(e) => update("windowSeconds", e.target.value)}
+        />
+      </Section>
+
+      {/* SECURITY */}
+      <Section title="Security Settings" icon={<Shield className="w-5 h-5" />}>
+        <Toggle
+          label="Enable CORS"
+          checked={settings.enableCors}
+          onChange={(e) => update("enableCors", e.target.checked)}
+        />
+
+        <Input
+          label="Allowed Origins"
+          value={settings.allowedOrigins}
+          onChange={(e) => update("allowedOrigins", e.target.value)}
+        />
+
+        <Input
+          label="JWT Expiry (seconds)"
+          type="number"
+          value={settings.jwtExpiry}
+          onChange={(e) => update("jwtExpiry", e.target.value)}
+        />
+
+        <Toggle
+          label="Enable Key Authentication"
+          checked={settings.enableKeyAuth}
+          onChange={(e) => update("enableKeyAuth", e.target.checked)}
+        />
+
+        <Textarea
+          label="Allowed IPs (comma-separated)"
+          value={settings.allowedIps}
+          onChange={(e) => update("allowedIps", e.target.value)}
+        />
+      </Section>
+
+      {/* NODE SETTINGS */}
+      <Section
+        title="Node & Engine Settings"
+        icon={<Gauge className="w-5 h-5" />}
+      >
+        <Input
+          label="Health Check Interval (sec)"
+          type="number"
+          value={settings.healthCheckInterval}
+          onChange={(e) => update("healthCheckInterval", e.target.value)}
+        />
+
+        <Input
+          label="Sync Interval (sec)"
+          type="number"
+          value={settings.syncInterval}
+          onChange={(e) => update("syncInterval", e.target.value)}
+        />
+
+        <Input
+          label="Retry Count"
+          type="number"
+          value={settings.retryCount}
+          onChange={(e) => update("retryCount", e.target.value)}
+        />
+
+        <Input
+          label="Timeout (ms)"
+          type="number"
+          value={settings.timeoutMs}
+          onChange={(e) => update("timeoutMs", e.target.value)}
+        />
+      </Section>
+
+      {/* NOTIFICATIONS */}
+      <Section
+        title="Notification Settings"
+        icon={<Settings className="w-5 h-5" />}
+      >
+        <div className="flex items-center justify-between p-3 bg-white rounded shadow  ">
+          <span>Enable Notifications</span>
+          <input
+            type="checkbox"
+            className="w-6 h-6 accent-slate-800"
+            checked={settings.notifications}
+            onChange={(e) => update("notifications", e.target.checked)}
+          />
+        </div>
+        <Input
+          type="email"
+          value={settings.email}
+          // label={"Email"}
+          onChange={(e) => update("email", e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded"
+          placeholder="Enter your email"
+        />
+        <Toggle
+          type="checkbox"
+          label={"Email Alerts"}
+          className="accent-slate-800"
+          checked={settings.emailAlert}
+          onChange={(e) => update("emailAlert", e.target.checked)}
+        />
+        <Toggle
+          type="checkbox"
+          label={"SMS Alerts"}
+          className="accent-slate-800"
+          checked={settings.smsAlert}
+          onChange={(e) => update("smsAlert", e.target.checked)}
+        />
+      </Section>
+
+      {/* SAVE BUTTON */}
+      <div>
+        <button
+          onClick={saveSettings}
+          className="px-5 py-2 bg-slate-800 text-white rounded-lg flex items-center gap-2 shadow hover:bg-slate-600"
+        >
+          <Save className="w-4 h-4" />
+          Save Settings
+        </button>
+      </div>
     </div>
+  );
+}
+
+function Section({ title, children }) {
+  return (
+    <div className="bg-white p-5 shadow rounded-xl border">
+      <h2 className="text-lg font-medium mb-4">{title}</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">{children}</div>
+    </div>
+  );
+}
+
+function Input({ label, ...props }) {
+  return (
+    <div className="flex flex-col">
+      <label className="text-sm text-gray-600 mb-1">{label}</label>
+      <input
+        {...props}
+        className="border rounded-lg p-2 bg-gray-50 focus:ring focus:ring-blue-300"
+      />
+    </div>
+  );
+}
+
+function Textarea({ label, ...props }) {
+  return (
+    <div className="flex flex-col col-span-1 md:col-span-2">
+      <label className="text-sm text-gray-600 mb-1">{label}</label>
+      <textarea
+        {...props}
+        className="border rounded-lg p-2 bg-gray-50 h-24 focus:ring focus:ring-blue-300"
+      />
+    </div>
+  );
+}
+
+function Select({ label, options, ...props }) {
+  return (
+    <div className="flex flex-col">
+      <label className="text-sm text-gray-600 mb-1">{label}</label>
+      <select
+        {...props}
+        className="border rounded-lg p-2 bg-gray-50 focus:ring focus:ring-blue-300"
+      >
+        {options.map((o) => (
+          <option key={o} value={o}>
+            {o}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
+function Toggle({ label, checked, onChange }) {
+  return (
+    <label className="flex items-center gap-3 mt-6 cursor-pointer accent-slate-800">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={onChange}
+        className="w-4 h-4"
+      />
+      <span className="text-sm text-gray-700">{label}</span>
+    </label>
   );
 }

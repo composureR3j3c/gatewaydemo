@@ -27,7 +27,7 @@ export default function Sidebar({ open }) {
            tracking-wide double-underline" 
           //  style={"text-decoration-style: solid;"}
            >
-            {open ? "API GW" : "AG"}
+            {open ? "Portus GW" : "PGW"}
           </span>
           {/* <button onClick={() => setOpen(!open)}>
             {open ? (

@@ -1,0 +1,22 @@
+{
+  "gatewayName": "My API Gateway",
+  "baseUrl": "http://localhost:8000",
+  "mode": "development",
+  "debugLogs": true,
+  "globalRateLimit": 1000,
+  "burstLimit": 200,
+  "windowSeconds": 60,
+  "enableCors": true,
+  "allowedOrigins": "*",
+  "jwtExpiry": 3600,
+  "enableKeyAuth": false,
+  "allowedIps": "10.1.20.25",
+  "healthCheckInterval": 10,
+  "syncInterval": 5,
+  "retryCount": 3,
+  "timeoutMs": 3000,
+  "email":"test@test.com",
+  "emailAlert":true,
+  "smsAlert":false,
+  "notifications":true
+}
