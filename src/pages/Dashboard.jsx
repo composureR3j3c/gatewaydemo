@@ -79,24 +79,18 @@ export default function Dashboard() {
       </div>
 
       {/* Node Info */}
-      <div className="bg-white rounded-xl shadow p-4 ">
+      <div className="bg-white rounded-xl shadow p-4">
         <h2 className="text-xl font-semibold mb-2">Node Info</h2>
-        <br />
-        <div
-          className="bg-white rounded-xl shadow p-4 flex justify-between items-center
-      "
-        >
-          <p className="text-gray-700">
+
+        <div className="bg-white rounded-xl shadow p-4 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-3">
+          <p className="text-gray-700 w-full sm:w-auto">
             Hostname: <span className="font-medium">{metrics.hostname}</span>
           </p>
-          <p className="text-gray-700">
+          <p className="text-gray-700 w-full sm:w-auto">
             Version: <span className="font-medium">{metrics.nodeVersion}</span>
           </p>
-          <p className="text-gray-700">
-            Uptime:{" "}
-            <span className="font-medium">
-              {Math.floor(Math.random() * 100)} hrs
-            </span>
+          <p className="text-gray-700 w-full sm:w-auto">
+            Uptime: <span className="font-medium">{Math.floor(Math.random() * 100)} hrs</span>
           </p>
         </div>
       </div>
@@ -104,7 +98,8 @@ export default function Dashboard() {
       {/* Routes Table */}
       <div className="bg-white rounded-xl shadow p-4">
         <h2 className="text-xl font-semibold mb-4">Routes</h2>
-        <table className="min-w-full text-left border border-gray-200 rounded-lg">
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-left border border-gray-200 rounded-lg">
           <thead className="bg-gray-50">
             <tr>
               <th className="px-4 py-2">Name</th>
@@ -121,22 +116,23 @@ export default function Dashboard() {
               </tr>
             ))}
           </tbody>
-        </table>
+          </table>
+        </div>
       </div>
 
       {/* Plugins Table */}
       <div className="bg-white rounded-xl shadow p-4">
         <h2 className="text-xl font-semibold mb-4">Plugins</h2>
-        {plugins.map((p) => (
-          <span
-            className={`px-2 py-1 rounded text-slate text-s m-1
-                  ${
-                    p.enabled ? "bg-green-200 text-green-800" : "bg-slate-200"
-                  }`}
-          >
-            {p.name}
-          </span>
-        ))}
+        <div className="flex flex-wrap gap-2">
+          {plugins.map((p) => (
+            <span
+              key={p.id}
+              className={`px-2 py-1 rounded text-sm m-1 ${p.enabled ? "bg-green-200 text-green-800" : "bg-slate-200 text-gray-700"}`}
+            >
+              {p.name}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );

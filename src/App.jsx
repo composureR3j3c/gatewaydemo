@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import RoutesPage from "./pages/RoutesPage";
@@ -30,9 +30,22 @@ export default function App() {
     return <Login />;
   }
 
+  const location = useLocation();
+
+  useEffect(() => {
+    // Auto-close sidebar on navigation for small screens
+    try {
+      if (window.innerWidth < 768) {
+        setOpen(false);
+      }
+    } catch (e) {
+      // ignore (server-side or test env)
+    }
+  }, [location.pathname]);
+
   return (
     <div className="flex h-screen bg-gray-50 text-gray-800">
-      <Sidebar open={open} />
+      <Sidebar open={open} onClose={() => setOpen(false)} />
 
       <div className="flex flex-col flex-1">
         <Topbar toggle={() => setOpen(!open)} />

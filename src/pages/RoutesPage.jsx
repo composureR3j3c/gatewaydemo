@@ -104,7 +104,7 @@ export default function RoutesPage() {
       {/* Add Route Modal */}
       {showAddModal && (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-xl shadow-lg w-96 space-y-4">
+          <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md mx-4 space-y-4">
             <h2 className="text-xl font-semibold text-gray-900">Add New Route</h2>
 
             <input
@@ -150,7 +150,7 @@ export default function RoutesPage() {
       {/* Edit Route Modal */}
       {showEditModal && (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-xl shadow-lg w-96 space-y-4">
+          <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md mx-4 space-y-4">
             <h2 className="text-xl font-semibold text-gray-900">Edit Route</h2>
 
             <input
@@ -196,7 +196,7 @@ export default function RoutesPage() {
       {/* Delete Confirmation Modal */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-xl shadow-lg w-96 space-y-4">
+          <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md mx-4 space-y-4">
             <h2 className="text-xl font-semibold text-gray-900">Delete Route?</h2>
             <p className="text-gray-700 text-sm">
               Are you sure you want to delete <strong>{selected?.name}</strong>?

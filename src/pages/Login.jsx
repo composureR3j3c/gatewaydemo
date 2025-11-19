@@ -24,7 +24,7 @@ export default function Login() {
     <div className="min-h-screen flex bg-gray-50">
       {/* SIDE PANEL */}
       <div className="hidden md:flex w-1/2 bg-slate-900 bg-gradient-to-r
-       from-slate-900 to-slate-800 text-white items-center justify-center flex-col px-10">
+       from-slate to-slate-800 text-white items-center justify-center flex-col px-10">
         <h1 className="text-4xl font-bold mb-4">Portus Gateway Manager</h1>
         <p className="text-lg text-slate-100">
           Secure • Scalable • Enterprise-grade API Gateway
@@ -41,9 +41,9 @@ export default function Login() {
            p-2 width-full rounded-lg">
             <div className="text-sm text-gray-500 cursor-pointer ">
               For demo, Use&nbsp;
-              <em><b>"admin@test.com"</b></em>
+              <em><b className="text-sm text-gray-400">`admin@test.com`</b></em>
               &nbsp;with password&nbsp;
-              <em><b>"admin"</b></em>
+              <em><b className="text-sm text-gray-400">`admin`</b></em>
             </div>
           </div>
 

@@ -2,9 +2,10 @@ import { useState } from "react";
 import EditPluginModal from "../components/modals/EditPluginModal";
 import AddPluginModal from "../components/modals/AddPluginModal";
 import ConfirmDeleteModal from "../components/modals/ConfirmDeleteModal";
-import pluginsJson from '/src/data/plugins.json';
+import pluginsJson from "/src/data/plugins.json";
+
 export default function PluginsPage() {
-  const [plugins, setPlugins] = useState(pluginsJson );
+  const [plugins, setPlugins] = useState(pluginsJson);
 
   const [showAdd, setShowAdd] = useState(false);
   const [editData, setEditData] = useState(null);
@@ -15,7 +16,7 @@ export default function PluginsPage() {
       <div className="space-y-6">
         <h1 className="text-2xl font-semibold text-gray-800">Plugins</h1>
 
-        <div className="bg-white shadow rounded-xl p-6 border border-gray-100">
+        <div className="bg-white shadow rounded-xl p-6 border border-gray-100 overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b text-gray-600">
@@ -41,21 +42,24 @@ export default function PluginsPage() {
                       {p.enabled ? "Enabled" : "Disabled"}
                     </span>
                   </td>
-                  <td className="py-3 space-x-3">
-                    <button
-                      className="px-3 py-1 bg-slate-800 text-white rounded-lg text-xs"
-                      onClick={() => setEditData(p)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className={`px-3 py-1 ${p.enabled ?'bg-gray-400':'bg-green-800 text-white'}  rounded-lg text-xs`}
-                      onClick={() => {
-                        updatePlugin({ ...p, enabled: !p.enabled });
-                      }}
-                    >
-                      {p.enabled ? "Disable" : "Enable"}
-                    </button>
+                  <td className="py-3">
+                    <div className="flex flex-col md:flex-row md:items-center md:space-x-3 space-y-2 md:space-y-0">
+                      <button
+                        className="w-full md:w-auto px-3 py-1 bg-slate-800 text-white rounded-lg text-xs"
+                        onClick={() => setEditData(p)}
+                      >
+                        Edit
+                      </button>
+
+                      <button
+                        className={`w-full md:w-auto px-3 py-1 ${p.enabled ? "bg-gray-400" : "bg-green-800 text-white"} rounded-lg text-xs`}
+                        onClick={() => {
+                          updatePlugin({ ...p, enabled: !p.enabled });
+                        }}
+                      >
+                        {p.enabled ? "Disable" : "Enable"}
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -63,15 +67,10 @@ export default function PluginsPage() {
           </table>
         </div>
       </div>
-      {showAdd && (
-        <AddPluginModal close={() => setShowAdd(false)} save={addPlugin} />
-      )}
+
+      {showAdd && <AddPluginModal close={() => setShowAdd(false)} save={addPlugin} />}
       {editData && (
-        <EditPluginModal
-          plugin={editData}
-          close={() => setEditData(null)}
-          save={updatePlugin}
-        />
+        <EditPluginModal plugin={editData} close={() => setEditData(null)} save={updatePlugin} />
       )}
       {deleteData && (
         <ConfirmDeleteModal
@@ -89,9 +88,11 @@ export default function PluginsPage() {
   function addPlugin(plugin) {
     setPlugins([...plugins, { ...plugin, id: Date.now() }]);
   }
+
   function updatePlugin(updated) {
     setPlugins(plugins.map((p) => (p.id === updated.id ? updated : p)));
   }
+
   function deletePlugin(id) {
     setPlugins(plugins.filter((p) => p.id !== id));
   }

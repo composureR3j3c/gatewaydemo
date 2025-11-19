@@ -15,14 +15,14 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="p-8 space-y-8">
+    <div className="p-6 space-y-8">
       <h1 className="text-2xl font-semibold text-gray-900 flex items-center gap-2">
         <PersonStanding className="w-6 h-6" />
         Profile
       </h1>
       <h1 className="text-3xl font-semibold text-gray-900"></h1>
 
-      <div className="bg-white shadow rounded-2xl p-6 max-w-3xl space-y-8">
+      <div className="bg-white shadow rounded-2xl p-4 sm:p-6 max-w-full sm:max-w-3xl mx-0 sm:mx-0 space-y-8">
         {/* Avatar + Basic */}
         <div className="flex items-center gap-6">
           <img

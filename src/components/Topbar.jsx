@@ -20,7 +20,8 @@ export default function Topbar({ toggle }) {
     <div className="h-16 bg-white shadow flex items-center justify-between px-5 border-b border-gray-200">
       <button
         onClick={toggle}
-        className="p-2 rounded-lg hover:bg-gray-200 transition text-gray-700 text-xl"
+        className="p-2 rounded-lg hover:bg-gray-200 transition text-gray-700 text-xl
+        "
       >
         ☰
       </button>

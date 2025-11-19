@@ -85,7 +85,8 @@ export default function MetricsPage() {
           <h2 className="text-lg font-medium">Node Stats</h2>
         </div>
 
-        <table className="w-full text-sm">
+  <div className="overflow-x-auto">
+  <table className="w-full text-sm">
           <thead>
             <tr className="text-left text-gray-600 border-b">
               <th className="pb-2">Node</th>
@@ -105,6 +106,7 @@ export default function MetricsPage() {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
 
       {/* --- PLUGIN ACTIVITY MOCK --- */}
