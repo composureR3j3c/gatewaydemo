@@ -31,13 +31,13 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="p-6 space-y-8">
-      <h1 className="text-3xl font-semibold text-gray-900">
+    <div className="p-4 md:p-6 space-y-6">
+      <h1 className="text-2xl md:text-3xl font-semibold text-gray-900">
         API Gateway Dashboard
       </h1>
 
       {/* Metrics Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white border shadow rounded-xl flex items-center gap-2 px-4">
           <div className="p-3 bg-blue-100 rounded-xl flex items-center gap-3">
             <Network className="w-5 h-5 text-blue-600" />
@@ -98,25 +98,40 @@ export default function Dashboard() {
       {/* Routes Table */}
       <div className="bg-white rounded-xl shadow p-4">
         <h2 className="text-xl font-semibold mb-4">Routes</h2>
-        <div className="overflow-x-auto">
+
+        {/* Table for md+ */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="min-w-full text-left border border-gray-200 rounded-lg">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">Path</th>
-              <th className="px-4 py-2">Upstream</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-100">
-            {routes.map((r) => (
-              <tr key={r.id} className="hover:bg-gray-50">
-                <td className="px-4 py-2">{r.name}</td>
-                <td className="px-4 py-2">{r.path}</td>
-                <td className="px-4 py-2">{r.upstream}</td>
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-4 py-2">Name</th>
+                <th className="px-4 py-2">Path</th>
+                <th className="px-4 py-2">Upstream</th>
               </tr>
-            ))}
-          </tbody>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {routes.map((r) => (
+                <tr key={r.id} className="hover:bg-gray-50">
+                  <td className="px-4 py-2">{r.name}</td>
+                  <td className="px-4 py-2">{r.path}</td>
+                  <td className="px-4 py-2">{r.upstream}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
+        </div>
+
+        {/* Cards for mobile */}
+        <div className="md:hidden space-y-3">
+          {routes.map((r) => (
+            <div key={r.id} className="border rounded-lg p-3 shadow-sm bg-white">
+              <div className="flex items-center justify-between">
+                <div className="font-medium text-gray-800">{r.name}</div>
+                <div className="text-xs text-gray-500">{r.upstream}</div>
+              </div>
+              <div className="text-sm text-gray-600 mt-2 truncate">{r.path}</div>
+            </div>
+          ))}
         </div>
       </div>
 

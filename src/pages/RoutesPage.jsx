@@ -65,7 +65,8 @@ export default function RoutesPage() {
         </button>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* desktop/tablet: table view */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200 rounded-xl shadow-sm">
           <thead className="bg-gray-50">
             <tr>
@@ -84,13 +85,16 @@ export default function RoutesPage() {
                 <td className="px-6 py-4 text-sm text-gray-800 flex space-x-3">
                   <button
                     onClick={() => openEdit(route)}
-                    className="text-blue-600 hover:underline"
+                    className="text-blue-600 hover:underline
+                w-full px-1 py-2 bg-blue-50 text-blue-600 rounded-lg"
+                    
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => confirmDelete(route)}
-                    className="text-red-600 hover:underline"
+                    className="text-red-600 hover:underline
+                    w-full px-1 py-2 bg-red-50 text-red-600 rounded-lg"
                   >
                     Delete
                   </button>
@@ -99,6 +103,36 @@ export default function RoutesPage() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* mobile: stacked cards */}
+      <div className="md:hidden space-y-3">
+        {routes.map((route) => (
+          <div key={route.id} className="bg-white border rounded-lg p-4 shadow-sm">
+            <div className="flex items-start justify-between">
+              <div>
+                <div className="font-semibold text-gray-800">{route.name}</div>
+                <div className="text-sm text-gray-600 mt-1 truncate">{route.path}</div>
+              </div>
+              <div className="text-xs text-gray-500 ml-4">{route.upstream}</div>
+            </div>
+
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <button
+                onClick={() => openEdit(route)}
+                className="w-full px-3 py-2 bg-blue-50 text-blue-600 rounded-lg text-sm"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => confirmDelete(route)}
+                className="w-full px-3 py-2 bg-red-50 text-red-600 rounded-lg text-sm"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Add Route Modal */}
